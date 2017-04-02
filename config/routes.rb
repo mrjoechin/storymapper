@@ -1,12 +1,23 @@
 Rails.application.routes.draw do
+  resources :storymaps do
+    resources :stories, :except => [:update, :destory]
+  end
+  resources :stories, :only => [:update, :destory]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'storymaps#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

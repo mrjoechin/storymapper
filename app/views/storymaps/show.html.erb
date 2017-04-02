@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+
+<h2><%= @storymap.name %> Storymap</h2>
+<p>
+  <%= @storymap.description %>
+</p>
+
+<h2>Stories</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Created At</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @storymap.stories.each do |story| %>
+    <tr>
+      <td><%= story.title %></td>
+      <td><%= story.story_type %></td>
+      <td><%= story.created_at %></td>
+      <td><%= link_to 'Edit', edit_storymap_story_path(@storymap, id: story.id) %> | <%= link_to 'Destroy', story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h2>Add a story:</h2>
+<%= form_for ([@storymap,@storymap.stories.build]) do |f| %>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :story_type %><br>
+    <%= f.select :story_type, Story.story_types.keys %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Edit', edit_storymap_path(@storymap) %> |
+<%= link_to 'Back', storymaps_path %>

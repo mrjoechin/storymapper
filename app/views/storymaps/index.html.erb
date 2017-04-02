@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @current_user.name %>'s Storymaps</h1>
+
+<%= link_to 'New Storymap', new_storymap_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Last Updated</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @storymaps.each do |storymap| %>
+      <tr>
+        <td><%= storymap.name %></td>
+        <td><%= storymap.description %></td>
+        <td><%= storymap.updated_at %></td>
+        <td><%= link_to 'Show', storymap %></td>
+        <td><%= link_to 'Edit', edit_storymap_path(storymap) %></td>
+        <td><%= link_to 'Destroy', storymap, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
